@@ -17,4 +17,6 @@ Mark of the Unicorn - FreeStyle midi sequencer helper stuff
  *  *  Left mouse button with middle mouse button resets the view (F11), stops playing (ESC) and applies the Tiles Pallet Left window setting.
  *  *  Lef mouse button with Right mouse button toggles note select and paint features, doing it twice launches the Brush/Cursor Settings window.
 	
-[Extended help document here](https://htmlpreview.github.io/?https://github.com/gwald/MOTU-FreeStyle-Helper/blob/main/FreeStyleHelp/index.html)
+[Extended help HTML document](https://htmlpreview.github.io/?https://github.com/gwald/MOTU-FreeStyle-Helper/blob/main/FreeStyleHelp/index.html)
+
+[Extended help PDF document](https://github.com/gwald/MOTU-FreeStyle-Helper/blob/main/FreeStyleHelp/FreeStyle_extended_help.pdf)
