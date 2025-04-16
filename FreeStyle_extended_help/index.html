@@ -1,5 +1,5 @@
 <style>body{max-width:1250px;}body,table,td {font-size:14px; font-family: Arial, Helvetica, sans-serif;}</style><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html lang="en">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
@@ -14,41 +14,124 @@
 
 	<h1> Mark Of The Unicorn - FreeStyle - Extended Help.</h1>
 	<br>April 2025<br>
-	<img data="MOTU-FreeStyle.png" title="MOTU-FreeStyle.png"><br>
-	<br>
+	<img src="MOTU-FreeStyle.png" title="MOTU-FreeStyle.png" width="100%" ><br>
+	<br
+		
 	Converted from FreeStyle.hlp file and cleaned up manually.	<br>
 	Links not configured, use the find tool to jump to sections. 	<br>
+	<a href="#START">Go to the start of Help here.</a>
+	
+	<br>
+	<br>
+	
+<p><hr><p>	
+
+	<br>
 	<br>
 	<H2>NOTE AND TIPS: </H2>
 	<BR> * FreeStyle only has one single level of undo and redo, which was common with early sequencers. 
-	<BR> * Using scrubbing over many notes can cause crashes.
+	<BR> * Scrubbing quickly or over many notes can cause crashes.
 	<br> 
+
 	
+	<hr>
 	<H2>FS_Helper: </H2>
 	From: <a href="https://github.com/gwald/MOTU-FreeStyle-Helper">https://github.com/gwald/MOTU-FreeStyle-Helper</a><br>
 	Download and extract all files into where your FreeStyle.exe is on your drive.<br>
-	<br>
-	This is a AutoHotKey v1.1 script to improve the user interface of FreeStyle, mostly mouse driven.
-	<BR> * When starting FS_Helper.exe it will also launch FS and when FS is closed it will self terminate.
-	<BR> * F1 launches the index.html single help file (anyone can contribute to it) in the FreeStyleHelp folder (located where your FreeStyle.exe is) if it's not found, it will try to launch the PDF version FreeStyle_extended_help.pdf (located where your FreeStyle.exe is) it will launch the normal windows help file.
-	<BR> * Mouse interface (only works in Graphic/grid view):
-	<br> * * *  Scroll wheel moves the page forward and backs (no short cuts available!).
-	<br> * * *  Right mouse button with scroll wheel moves the page up and down (no short cuts available!).
-	<BR> * * *  Middle mouse button with scroll wheel zooms in (F9) and out (Shift F9).
-	<BR> * * *  Left mouse button with middle mouse button resets the view (F11), stops playing (ESC) and applies the Tiles Pallet Left window setting.
-	<BR> * * *  Lef mouse button with Right mouse button toggles note select and paint features, doing it twice launches the Brush/Cursor Settings window.
 	
+	<br>	This is a AutoHotKey v1.1 script to improve the user interface of FreeStyle, mostly mouse driven.
+	<BR>* When starting FS_Helper.exe it will also launch FS and when FS is closed it will self terminate.
+	<BR> * F1 launches the index.html single help file (anyone can contribute to it) in the FreeStyle_extended_help folder if it's not found, it will try to launch the PDF version FreeStyle_extended_help.pdf, lastly if not found it will launch the normal windows help file, FreeStyle.hlp .
+	<BR> * Shift F1 launches the <a href="https://archive.org/details/stx_Mark_of_the_Unicorn_FreeStyle_for_Macinotsh_manual">FreeStyle v1 (Mac) Manual PDF</a>. 
+	<BR> * Mouse interface only tested in Graphic (grid) view, with a single .FSL project open:
+	<br> * * *  Scroll wheel moves the page forward and backwards (no shortcut available!).
+	<br> * * *  Right mouse button with scroll wheel moves the page up and down (no shortcut available!).
+	<BR> * * *  Middle mouse button with scroll wheel zooms in (F9) and out (Shift F9).
+	<BR> * * *  Left mouse button with middle mouse button resets the view (F11), stops playing (ESC) and applies the "Tile Pallet Left" window setting.
+	<BR> * * *  Left mouse button with Right mouse button toggles note select and paint features, doing it twice launches the Brush/Cursor Settings window.
+	
+	
+	<hr>
+	<h2>Quick Interface Guide</h2><br>
+	Recommend first watching FreeStyle's instructional <a href="https://www.youtube.com/watch?v=oEUxZmSiHcA">VHS Tape that was part of this package</a>.<br>
+	<br>
+	<a href="https://www.youtube.com/watch?v=j0xYfv_hF1E">MOTU FREESTYLE VIDEO by LANCE ABAIR, uploaded by the video instructor!</a><br>
+	<br>
+	Or the high quality VHS rip, with a weird reverb in the audio: <br>
+	<br>
+	<a href="https://www.youtube.com/watch?v=KKTYyXPGotc">Getting into FreeStyle (1994) by mrjazzycharon2.</a><br>
+	
+	<br>
+	
+	<B>Termonology:</B><br>
+	<br>
+	FreeStyle uses traditional musical terms instead of current DAW terms.<br>
+	Players (musicians), ensembles (band, orchestra, etc),  takes (a performance ie, alternative, improv, etc) and arrangements (song compositing, remix, reworking, etc) and which in DAW terms means,<br> 
+	Instruments,  instrument grouping, tracks (grouped by instrument) and arrangement (session, project view etc).<br>
+
+<br>
+	<B>Undocumented shortcuts:</B><br>
+	<br>
+	*  CTRL + Left mouse button on any player name in the ensemble window. 	Automatically selects all players in the ensemble window and displays their notes in the Document (Graphic or Notation) view.<br>
+	<br>
+	<a href="#SHORTCUTS">See more shortcuts here.</a><br>
+	
+	<hr>
+	<h2>FreeStyle Files</h2>	
+	<br>
+	<BR><b>Your midi song project file .FSL (FreeStyle Library)</b><BR>
+	Stores everything, including: <br>
+		Player information and Layer sounds settings.<br>
+		
+   <BR> <b>Stationery (like formated book that's empty) .FST (FreeStyle Template)</b><BR>
+	Stores everything except notes and controller (velocity etc) data.<BR>
+	See "Pop Song Template.fst" in the demo folder, for a pop song arrangement template.<br>
+	
+	<BR><b>S.S Stationery .FSS (FreeStyle Song Structure Template)</b><BR>
+	Stores:<BR>
+		Only notes and controller data and song sections in the arrangements window.<br>
+		Used for migrating songs to different ensembles/players.<BR>
+		See "Seamless in Seattle.FSS" in the demo folder, for a pop song arrangement template.<br>
+
+  
+	<BR><b>FreeStyle.fsp (FS Preferences?) </b><BR>
+	Default metronome <BR>
+	Saved window layout <BR>
+	Remote Controls (for midi keyboard) <br>
+
+	<BR><b>fsconfig.fms (FS MIDI Settings) </b><BR>
+	FreeStyle's MIDI device configuration configured in Studio Setup window, this is how FS uses the MIDI devices.<br>
+	
+
+	<BR><b>Freestyl.fpl (FS Player Library?)</b><BR>
+	Player Library <br>
+	Ensemble Library <br> 
+	
+
+	<BR><b>C:\Windows\Freemidi\FMSPREFS - FreeMIDI</b><BR>
+	FREEMIDI is the way FS understands the OS level, MIDI devices, these devices are then displayed in the Studio Setup's Device Usage window.<br>
+	It can get corrupted with regular changing, deleting it and FS will recreate it.<br>
+	
+
+
+	<BR><b>FreeStyle.GID</b><BR>
+	Ignore: Often hidden, Windows 95 and 98, to improve access and indexing of help topics in the Windows Help system.
+
+ 
 	
 	<BR> Help and discussions about FreeStyle <a href="https://forum.winworldpc.com/discussion/15889/offering-mark-of-the-unicorn-motu-freestyle-v2-31-windows-midi-sequencer#latest">here</a>.
 <br>
 	
 <p><hr><p>
+<p><hr><p>
+<p><hr><p>
 	
-	
+	<a id="START"></a>
 <b><span style="font-size:20pt"><font color="#408080">FreeStyle Help Contents</font></span></b><font size="3"><br>
 </font><br>
 <u><font size="2">READ THIS FIRST! FreeStyle Quick-Start Guide</font></u><br>
 <br>
+
 <u>FreeStyle Basics</u><br>
 <br>
 <u>Additional FreeStyle Topics</u><br>
@@ -1718,7 +1801,7 @@ Note velocities (the "velocity" of a note determines how loud it is) are the one
 	
 </font></font><b><span style="font-size:20pt"><font color="#408080">Controllers<font size="1"> (2 of 8)</font></font></span></b><font size="3"><br>
 </font><b><span style="font-size:16pt"><font color="#800040">Drawing controllers in the controller grid</font></span></b><font size="3"><br>
-</font><font size="2">Controllers are inserted, displayed, and edited in the controller grid, which appears right below the note grid in the Graphic Editing view. To display the grid, display the Graphic Editing view and then choose Controllers from the View menu, or press CtrlF11 instead as a shortcut. In FreeStyle's controller grid, you can draw a single controller by clicking once with the pencil tool to achieve a sudden effect, or you can draw a smooth curve by dragging the pencil, line, and curve tools. When inserting controllers, you do so for one player at a time: the currently record-enabled player. So any time you draw controllers, first record-enable the player you want to edit.<font size="3"><br>
+</font><font size="2">Controllers are inserted, displayed, and edited in the controller grid, which appears right below the note grid in the Graphic Editing view. To display the grid, display the Graphic Editing view and then choose Controllers from the View menu, or press Ctrl F11 instead as a shortcut. In FreeStyle's controller grid, you can draw a single controller by clicking once with the pencil tool to achieve a sudden effect, or you can draw a smooth curve by dragging the pencil, line, and curve tools. When inserting controllers, you do so for one player at a time: the currently record-enabled player. So any time you draw controllers, first record-enable the player you want to edit.<font size="3"><br>
 </font></font><font size="2"><img data="bm55.jpg" title="bm55.jpg"></font><font size="3"><br>
 <p><hr><p>
 	
@@ -3603,7 +3686,7 @@ When saving as a Standard MIDI File, only the song or section displayed here is 
 </font>Fills the display horizontally with the region of time you select.<br>
 Ctrl-drag in the pitch ruler<br>
 Fills the display vertically with the range of pitches you select.<br>
-CtrlShift click anywhere in graphic editing or notation display<br>
+Ctrl Shift click anywhere in graphic editing or notation display<br>
 Zooms back to the previous zoom setting (just like Zoom Back).<br>
 Ctrl-drag a selection box over any portion of the graphic editing or notation view<br>
 Fills the window with the region you select.<font size="3"><br>
@@ -3864,7 +3947,7 @@ Fills the window with the region you select.<font size="3"><br>
 
 </font></font><b><span style="font-size:20pt"><font color="#408080">Record Menu</font></span></b><font size="3"><br>
 </font><b><span style="font-size:16pt"><font color="#800040">Advance Record Loop</font></span></b><font size="3"><br>
-</font><font size="2">Makes the Record Loop jump ahead to the next range of measures. For example, if the Record Loop is currently looping measures 1 through 4, advancing it will make it jump to the next four bars, measures 5 through 8. If you are currently viewing a song and the Record Loop matches the boundaries of a section, it will advance to the boundaries of the next section. The Advance Record Loop command is disabled when the Record Loop is turned off. To turn on the Record Loop, choose Toggle Record Loop from the Record menu, or press CtrlL.<font size="3"><br>
+</font><font size="2">Makes the Record Loop jump ahead to the next range of measures. For example, if the Record Loop is currently looping measures 1 through 4, advancing it will make it jump to the next four bars, measures 5 through 8. If you are currently viewing a song and the Record Loop matches the boundaries of a section, it will advance to the boundaries of the next section. The Advance Record Loop command is disabled when the Record Loop is turned off. To turn on the Record Loop, choose Toggle Record Loop from the Record menu, or press Ctrl L.<font size="3"><br>
 <p><hr><p>
 <p><hr><p>
 <p><hr><p>
@@ -4361,7 +4444,7 @@ To create a custom sound list for your MIDI instrument, open and read the follow
 <u>Fonts</u><br>
 <p><hr><p>
 		
-	
+
 <b><span style="font-size:20pt"><font color="#408080">Text Menu</font></span></b><font size="3"><br>
 </font><b><span style="font-size:16pt"><font color="#800040">Text Settings</font></span></b><font size="3"><br>
 </font><font size="2">If you make selections in the text menu while text is selected, you will affect the selected text. You can also control the appearance and placement of text you are about to enter by changing the settings when no text is selected.<font size="3"><br>
@@ -4373,7 +4456,11 @@ To create a custom sound list for your MIDI instrument, open and read the follow
 <font size="2">This text setting determines what pages the text appears on. You can apply it to a text box in the same manner as point size, text style, and justification. For example, the title might be given the First Pages setting, but a page number might be given the Body Pages setting. If an item is grayed out, it is because it does not apply to the situation; for example, if the notation window is currently displaying a left-hand page, the Right Pages command is grayed out. See the table below for a summary.<br>
 </font>When choosing which pages to display text on, keep in mind that FreeStyle has two separate text layouts in the notation view: one for instrument parts (used when any player is displayed by itself) and another for scores (viewing multiple players together). When you display a single player by itself, FreeStyle displays the single-player text regardless of what player is being shown (except for the player's name, which changes to show the correct instrument name).<br>
 <font size="3"><br>
-</font><table border="2">
+</font>
+
+<table border="2">
+
+
 <tr><td><b><span style="font-size:9pt">Page setting:</span></b></td>
 <td>Where text appears:</td>
 <td>Examples:<font size="3"></font></td>
@@ -4407,6 +4494,7 @@ To create a custom sound list for your MIDI instrument, open and read the follow
 <td>Text appears on every page, including the first page.</td>
 <td>Headers, footers, page numbers, instrument part names, copyright notices<font size="3"></font></td>
 </tr>
+</table>
 <br>
 <p><hr><p>	
 	
@@ -4706,7 +4794,7 @@ Note that these special assignments for function keys will be in effect only whe
 <p><hr><p>
 
 
-
+<a id="SHORTCUTS"></a>
 </font><b><span style="font-size:20pt"><font color="#408080">Keyboard shortcuts</font></span></b><font size="3"><br>
 </font><font size="2">In general these keyboard shortcuts can be used in combination with each other. For example, you can simultaneously hold down the Command Key to select a different tool, and the Shift Key to toggle the setting of Cursor Snaps to Grid.<br>
 </font><font size="3"><br>
