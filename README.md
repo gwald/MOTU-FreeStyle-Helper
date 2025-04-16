@@ -1,8 +1,8 @@
 # MOTU-FreeStyle-Helper
 
-	FS_Helper - Mark of the Unicorn - FreeStyle midi sequencer helper stuff
- 
-	From: https://github.com/gwald/MOTU-FreeStyle-Helper
+FS_Helper - [Mark of the Unicorn - FreeStyle midi sequencer](https://github.com/gwald/MOTU-FreeStyle-Helper) helper stuff.
+
+From: [https://github.com/gwald/MOTU-FreeStyle-Helper](https://github.com/gwald/MOTU-FreeStyle-Helper)
  
  [Download](https://github.com/gwald/MOTU-FreeStyle-Helper/archive/refs/heads/main.zip) and extract all files into where your FreeStyle.exe is on your drive and run FS_Helper/build_deploy.bat before using.
 
