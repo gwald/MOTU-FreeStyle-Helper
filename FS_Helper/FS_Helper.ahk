@@ -3,9 +3,19 @@
 ; In a command line interface CD to that directory and run:
 ; Ahk2Exe.exe /in FS_Helper.ahk /base "ANSI 32-bit.bin" /icon 56.ico
 ;
+; To run:
+; taskkill /F /IM "FS_Helper.exe" /T
+; copy /Y FS_Helper.exe ..
+; ..\FS_Helper.exe
+;
+;
+; taskkill /F /IM "FS_Helper.exe" /T & copy /Y FS_Helper.exe .. && ..\FS_Helper.exe
+;
 ; Made possible with Grok: https://x.com/i/grok
 ;
 ; V1 - Mostly working fine.
+
+
 
 #NoEnv
 SetWorkingDir %A_ScriptDir%
@@ -54,7 +64,7 @@ if FileExist(HelpFile) {
 	;	MsgBox, FreeStyle_extended_help HTML not found in %ProcessDir%
 
 	; HTML not found, launch PDF help instead
-	HelpFile := ProcessDir "\FreeStyle_extended_help.pdf"
+	HelpFile := ProcessDir "\FreeStyle_extended_help\FreeStyle_extended_help.pdf"
 	if FileExist(HelpFile) {
     Run, %HelpFile%
 	} else {
@@ -81,13 +91,30 @@ return
 WinGet, ProcessPath, ProcessPath, ahk_class FreeStyleAppWind
 SplitPath, ProcessPath,, ProcessDir
 HelpFile := ProcessDir "\FreeStyle_extended_help\Mark_of_the_Unicorn_FreeStyle_for_Macinotsh_manual.pdf"
- MsgBox, The full path of this script is:%HelpFile%
+; MsgBox, The full path of this script is:%HelpFile%
+
 if FileExist(HelpFile) {
     Run, %HelpFile%
 } else {
-		MsgBox, File not found: %HelpFile%
+		MsgBox, File not found: %HelpFile% going to download from archive.org now!
+		
+		UrlDownloadToFile, https://archive.org/download/stx_Mark_of_the_Unicorn_FreeStyle_for_Macinotsh_manual/Mark_of_the_Unicorn_FreeStyle_for_Macinotsh_manual.pdf , %HelpFile%
+		
+
+		if FileExist(HelpFile) {
+		Run, %HelpFile%
+		} else {
+		MsgBox, Download from archive.org failed!
+		
+		MsgBox, https://archive.org/download/stx_Mark_of_the_Unicorn_FreeStyle_for_Macinotsh_manual/Mark_of_the_Unicorn_FreeStyle_for_Macinotsh_manual.pdf
+
+		}
+
+
+
 	}
 return
+
 
 
 ; Right mouse Up + WheelUp: Scroll ScrollBar2 up
