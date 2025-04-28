@@ -1,6 +1,6 @@
 # MOTU-FreeStyle-Helper
 
-FS_Helper - [Mark of the Unicorn - FreeStyle midi sequencer](https://github.com/gwald/MOTU-FreeStyle-Helper) helper stuff.
+FS_Helper - Mark of the Unicorn - FreeStyle midi sequencer helper stuff.
 
 From: [https://github.com/gwald/MOTU-FreeStyle-Helper](https://github.com/gwald/MOTU-FreeStyle-Helper)
  
