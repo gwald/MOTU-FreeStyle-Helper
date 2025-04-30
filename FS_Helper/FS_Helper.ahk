@@ -3,16 +3,13 @@
 ; In a command line interface CD to that directory and run:
 ; Ahk2Exe.exe /in FS_Helper.ahk /base "ANSI 32-bit.bin" /icon 56.ico
 ;
-; To run:
-; taskkill /F /IM "FS_Helper.exe" /T
-; copy /Y FS_Helper.exe ..
-; ..\FS_Helper.exe
+; To run use:
+; build_deploy.bat
 ;
-;
-; taskkill /F /IM "FS_Helper.exe" /T & copy /Y FS_Helper.exe .. && ..\FS_Helper.exe
 ;
 ; Made possible with Grok: https://x.com/i/grok
 ;
+; v4 - changed F1 and Shift F1 to F10 and CTRL F2 to avoid conflicting.
 ; V1 - Mostly working fine.
 
 
@@ -52,8 +49,8 @@ return
 ; Only activate hotkeys when FreeStyleAppWind is active
 #IfWinActive ahk_class FreeStyleAppWind
 
-; F1: Open FreeStyle.hlp from the program's folder
-F1::
+; F10: Open FreeStyle.hlp from the program's folder
+~F10::
 WinGet, ProcessPath, ProcessPath, ahk_class FreeStyleAppWind
 SplitPath, ProcessPath,, ProcessDir
 HelpFile := ProcessDir "\FreeStyle_extended_help\index.html"
@@ -87,7 +84,7 @@ return
 
 
 ; Shift F1: Open  Mark_of_the_Unicorn_FreeStyle_for_Macinotsh_manual.pdf
-+F1::
+~^F2::
 WinGet, ProcessPath, ProcessPath, ahk_class FreeStyleAppWind
 SplitPath, ProcessPath,, ProcessDir
 HelpFile := ProcessDir "\FreeStyle_extended_help\Mark_of_the_Unicorn_FreeStyle_for_Macinotsh_manual.pdf"
@@ -114,6 +111,33 @@ if FileExist(HelpFile) {
 
 	}
 return
+
+
+
+; Change the URL link below to which ever video you like best!
+
+; MOTU FREESTYLE VIDEO by LANCE ABAIR, uploaded by the video instructor!
+; https://www.youtube.com/watch?v=j0xYfv_hF1E
+
+; or
+
+; high quality VHS rip, with a weird reverb in the audio: Getting into FreeStyle (1994) by mrjazzycharon2.
+
+; https://www.youtube.com/watch?v=KKTYyXPGotc 
+
+; or
+
+; Best mix of both https://archive.org/upload/?identifier=mark-of-the-unicorn-motu-freestyle-v2.31-windows?autoplay=1 
+
+; CTRL F5: Open FS VHS video
+~^F5::
+WinGet, ProcessPath, ProcessPath, ahk_class FreeStyleAppWind
+SplitPath, ProcessPath,, ProcessDir
+    Run, "https://www.youtube.com/watch?v=KKTYyXPGotc"	
+return
+
+
+
 
 
 
