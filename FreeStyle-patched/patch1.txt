@@ -1,12 +1,15 @@
 This program also has the 32bit 4GB patched applied by editbin.exe
 
 
-April 30th 2025 - Crashes because of event viewer (I think) trying to access a NULL pointe
-Download Doom Eternal - The Only Thing They Fear Is You.mid from 
+April 30th 2025 - Crashes because of event viewer (I think) trying to access a NULL pointer
+
+Download: Doom Eternal - The Only Thing They Fear Is You.mid from 
 https://onlinesequencer.net/2492551 
-Create new blank project
-Import mid as normal, play with all instruments selected with the even list window displayed.
+
+In a new blank project, import mid as normal, play with all instruments selected with the even list window displaying notes.
 It will crash in bar 26, this patch seems to have fixed it.
+
+Fixed with Grok 3
 
 
 005FCABC | 0000                     | add byte ptr ds:[eax],al                |
