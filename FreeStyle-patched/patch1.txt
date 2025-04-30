@@ -1,0 +1,179 @@
+This program also has the 32bit 4GB patched applied by editbin.exe
+
+
+April 30th 2025 - Crashes because of event viewer (I think) trying to access a NULL pointe
+Download Doom Eternal - The Only Thing They Fear Is You.mid from 
+https://onlinesequencer.net/2492551 
+Create new blank project
+Import mid as normal, play with all instruments selected with the even list window displayed.
+It will crash in bar 26, this patch seems to have fixed it.
+
+
+005FCABC | 0000                     | add byte ptr ds:[eax],al                |
+005FCABE | 0000                     | add byte ptr ds:[eax],al                |
+005FCAC0 | 8B41 04                  | mov eax,dword ptr ds:[ecx+4]            |
+005FCAC3 | C3                       | ret                                     |
+005FCAC4 | 0000                     | add byte ptr ds:[eax],al                |
+005FCAC6 | 0000                     | add byte ptr ds:[eax],al                |
+005FCAC8 | 0000                     | add byte ptr ds:[eax],al                |
+005FCACA | 0000                     | add byte ptr ds:[eax],al                |
+
+start the patch at 005FCAC0 and make it grow down because there's nothing under it
+
+
+
+Crash Cause: The instruction at 005FCAC0 (mov eax, dword ptr ds:[ecx+4]) tries to read a 32-bit value from [ECX+4], but ECX = 0, causing an access violation (trying to read from address 0x4).
+
+Original Code: The code at 005FCAC0 to 005FCAC3 is:
+
+005FCAC0: mov eax, [ecx+4]  ; 8B 41 04
+005FCAC3: ret              ; C3
+
+This suggests a function that takes a pointer in ECX (likely a this pointer in __thiscall or a structure pointer), reads a 32-bit value at offset +4, and returns it in EAX.
+
+Available Space: Starting at 005FCAC0, we can overwrite the original instructions and grow downward. The bytes at 005FCAC4 to 005FCACA are 00 00 (filler), providing ample space for the patch.
+
+Patch Goal: Check if ECX is null. If null, return a safe value (e.g., 0). If non-null, execute the original mov eax, [ecx+4] and return. Ensure any calls to 005FCAC0 execute the patched code.
+
+Patch Plan
+We'll:
+Start the patch at 005FCAC0.
+
+Insert a null check for ECX.
+
+If ECX is null, set EAX = 0 and return.
+
+If ECX is non-null, perform the original mov eax, [ecx+4] and return.
+
+Use the space from 005FCAC0 downward (e.g., 005FCAC3, 005FCAC4, etc.) to fit the instructions.
+
+Overwrite any unused bytes with nop for safety.
+
+Assembly Patch
+Here’s the proposed patch:
+
+005FCAC0: test ecx, ecx         ; Check if ECX is 0
+005FCAC2: jz 005FCAC8           ; Jump to safe return if ECX is 0
+005FCAC4: mov eax, [ecx+4]      ; Original instruction: load [ECX+4] into EAX
+005FCAC7: ret                   ; Return
+005FCAC8: xor eax, eax          ; Set EAX = 0 (safe value)
+005FCACA: ret                   ; Return
+005FCACB: nop                   ; Filler (optional)
+...
+
+Null Check: test ecx, ecx checks if ECX is zero. jz 005FCAC8 jumps to the safe return if zero.
+
+Original Logic: mov eax, [ecx+4] and ret execute the original behavior if ECX is non-null.
+
+Safe Return: xor eax, eax sets EAX = 0, and ret returns safely if ECX is null.
+
+Jump Offset: The jump from 005FCAC2 to 005FCAC8 is calculated as 005FCAC8 - 005FCAC4 = 0x4 (since jz is at 005FCAC2, and the offset is relative to the next instruction).
+
+Machine Code
+test ecx, ecx: 85 C9
+
+jz 005FCAC8: 74 04 (offset 0x4)
+
+mov eax, [ecx+4]: 8B 41 04
+
+ret: C3
+
+xor eax, eax: 31 C0
+
+ret: C3
+
+nop: 90
+
+Patch table:
+
+Address    Original         Patched
+005FCAC0   8B 41 04         85 C9          ; test ecx, ecx
+005FCAC2   C3               74 04          ; jz 005FCAC8
+005FCAC4   00 00            8B 41 04       ; mov eax, [ecx+4]
+005FCAC6   00 00            C3             ; ret
+005FCAC7   00               31 C0          ; xor eax, eax
+005FCAC9   00               C3             ; ret
+005FCACA   00 00            90             ; nop
+
+Applying the Patch in x64dbg
+Open the executable in x64dbg.
+
+Navigate to address 005FCAC0 in the CPU view.
+
+Press Ctrl+E (Binary Edit) or right-click and select "Binary -> Edit".
+
+Enter the byte sequence: 85 C9 74 04 8B 41 04 C3 31 C0 C3 90.
+
+Click OK to apply.
+
+Save the patch:
+Go to File -> Patch File or press Ctrl+P.
+
+Select "Create backup" and save the modified executable.
+
+C Language Equivalent
+The patched assembly implements a function that:
+Takes a pointer in ECX (likely a this pointer or structure pointer).
+
+Checks if the pointer is null.
+
+Returns 0 if null.
+
+Otherwise, returns the 32-bit value at offset +4 from the pointer.
+
+The C equivalent is:
+c
+
+uint32_t function(void* ptr) {
+    if (ptr == NULL) {
+        return 0;
+    }
+    return *(uint32_t*)((char*)ptr + 4);
+}
+
+
+Notes
+Space Usage: The patch uses 10 bytes (005FCAC0 to 005FCACA), fitting within the filler space starting at 005FCAC4. Additional nops can be added if needed to overwrite more filler bytes (e.g., up to 005FCACA).
+
+Jump Consideration: Unlike the previous patch, we don’t need a jump at 005FCAC0 because the patch starts there, ensuring that any calls or jumps to 005FCAC0 execute the new code directly.
+
+Safety: Returning 0 when ECX is null is a safe default. If the program expects a different value, you can replace xor eax, eax with mov eax, <value>.
+
+Filler Instructions: The add byte ptr ds:[eax], al instructions around 005FCAC0 (e.g., at 005FCABC, 005FCAC4) suggest padding or obfuscation. The patch avoids modifying these unless necessary, focusing on the crash point.
+
+Testing: Test the patched executable to ensure the null check resolves the crash without breaking other functionality. If ECX being 0 indicates a deeper issue, trace backward to understand why.
+
+Final Answer
+Patch:
+
+Address    Original         Patched
+005FCAC0   8B 41 04         85 C9          ; test ecx, ecx
+005FCAC2   C3               74 04          ; jz 005FCAC8
+005FCAC4   00 00            8B 41 04       ; mov eax, [ecx+4]
+005FCAC6   00 00            C3             ; ret
+005FCAC7   00               31 C0          ; xor eax, eax
+005FCAC9   00               C3             ; ret
+005FCACA   00 00            90             ; nop
+
+Byte sequence: 85 C9 74 04 8B 41 04 C3 31 C0 C3 90
+C Equivalent:
+c
+
+uint32_t function(void* ptr) {
+    if (ptr == NULL) {
+        return 0;
+    }
+    return *(uint32_t*)((char*)ptr + 4);
+}
+
+
+TO PATCH
+
+Patched using x64dbg
+
+Applied to line: 005FCAC0 (right click in CPU view -> go to -> expression: 005FCAC0)
+Patch it:
+Copy hex values 
+85 C9 74 04 8B 41 04 C3 31 C0 C3 90
+right click line 005FCAC0 and binary -> paste (ignore size)
+
