@@ -1,0 +1,1 @@
+del /F /Q C:\Windows\Freemidi\FMSPREFS
